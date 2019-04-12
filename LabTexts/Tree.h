@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
+#include "Stack.h"
 
 using namespace std;
 
-struct Node
+struct Node       //Node ג מעהוכüםûי פאיכ
 {
 	string str;
 	Node *l, *r;
@@ -19,11 +20,10 @@ public:
 	void insert_new_paragraph(string _str);
 	void insert_new_article(string _str);
 	void delete_current_section();
-	void move_left() { cur = cur->l; }
-	void move_right() { cur = cur->r; }
+	void next_section() { cur = cur->l; }
+	void open_content() { cur = cur->r; }
 	void delete_content() { cur->str = ""; }
 	void change_content(string _str) { cur->str = _str; }
-	void retrun_to_root() { cur = root; }
+	void return_to_root() { cur = root; }
 	void return_back();
-	void next_section();
 };
