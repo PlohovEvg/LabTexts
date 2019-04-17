@@ -1,15 +1,16 @@
 #pragma once
-#include "Tree.h"
-struct Node;
-class Stack1
+#include "Node.h"
+
+class Stack
 {
 	int size;
 	int ind;
 	Node **mem;
 public:
-	Stack1(int _size = 50);
-	Stack1(const Stack1 &st);
-	~Stack1() { delete[]mem; }
+	Stack(int _size = 100);
+	Stack(const Stack &st);
+	void Clear_Stack() { ind = -1; }
+	~Stack() { delete[]mem; }
 	bool IsEmpty() { return (ind == -1); }
 	bool IsFull() { return (ind == size - 1); }
 	Node* Pop();
