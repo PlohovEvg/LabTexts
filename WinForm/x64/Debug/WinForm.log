@@ -1,4 +1,4 @@
 ﻿  MyForm.cpp
-  MyForm.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
+  Stack.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
   WinForm.vcxproj -> C:\Users\Пользователь\Documents\Git\LabTexts\x64\Debug\WinForm.exe
   WinForm.vcxproj -> C:\Users\Пользователь\Documents\Git\LabTexts\x64\Debug\WinForm.pdb (Partial PDB)

@@ -132,9 +132,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\LabTexts\Stack.cpp" />
+    <ClCompile Include="..\LabTexts\Tree.cpp" />
     <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\LabTexts\Node.h" />
+    <ClInclude Include="..\LabTexts\Stack.h" />
+    <ClInclude Include="..\LabTexts\Tree.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -143,6 +148,11 @@
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LabTexts\LabTexts.vcxproj">
+      <Project>{b3301967-e4b2-44a0-aa19-0ffd00405a55}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
