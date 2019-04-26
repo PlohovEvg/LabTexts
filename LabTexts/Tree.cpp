@@ -118,14 +118,14 @@ string Tree::whole_tree_to_string()
 		if (p != cur)
 		{
 			res += p->str;
-			res += "\n";
+			res += "\r\n";
 			res += paragraphs_to_string(p->r);
 		}
 		else
 		{
 			res += "*";
 			res += p->str;
-			res += "\n";
+			res += "\r\n";
 			res += paragraphs_to_string(p->r);
 		}
 		p = p->l;
@@ -146,7 +146,7 @@ string Tree::paragraphs_to_string(Node *t)
 		{
 			res += "  ";
 			res += p->str;
-			res += "\n";
+			res += "\r\n";
 			res += articles_to_string(p->r);
 		}
 		else
@@ -154,7 +154,7 @@ string Tree::paragraphs_to_string(Node *t)
 			res += "  ";
 			res += "*";
 			res += p->str;
-			res += "\n";
+			res += "\r\n";
 			res += articles_to_string(p->r);
 		}
 		p = p->l;
