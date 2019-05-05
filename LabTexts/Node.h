@@ -3,6 +3,8 @@
 
 using namespace std;
 
+
+
 struct Node
 {
 	string str;

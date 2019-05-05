@@ -1,5 +1,6 @@
 #pragma once
 #include "Tree.h"
+#include "MarshalString.h"
 
 namespace WinForm {
 
@@ -54,6 +55,8 @@ namespace WinForm {
 	private: System::Windows::Forms::Button^  button6;
 	private: System::Windows::Forms::Button^  button7;
 	private: System::Windows::Forms::Button^  button8;
+	private: System::Windows::Forms::Button^  button9;
+	private: System::Windows::Forms::Button^  button10;
 	protected:
 
 	private:
@@ -82,6 +85,8 @@ namespace WinForm {
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->button8 = (gcnew System::Windows::Forms::Button());
+			this->button9 = (gcnew System::Windows::Forms::Button());
+			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -112,6 +117,7 @@ namespace WinForm {
 			this->button3->TabIndex = 3;
 			this->button3->Text = L"Добавить параграф";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
 			// button4
 			// 
@@ -125,11 +131,13 @@ namespace WinForm {
 			// 
 			// textBox1
 			// 
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->textBox1->Location = System::Drawing::Point(3, 0);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ReadOnly = true;
-			this->textBox1->Size = System::Drawing::Size(607, 290);
+			this->textBox1->Size = System::Drawing::Size(607, 304);
 			this->textBox1->TabIndex = 5;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
@@ -139,6 +147,7 @@ namespace WinForm {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(210, 20);
 			this->textBox2->TabIndex = 6;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
 			// 
 			// textBox3
 			// 
@@ -201,11 +210,33 @@ namespace WinForm {
 			this->button8->UseVisualStyleBackColor = true;
 			this->button8->Click += gcnew System::EventHandler(this, &MyForm::button8_Click);
 			// 
+			// button9
+			// 
+			this->button9->Location = System::Drawing::Point(425, 481);
+			this->button9->Name = L"button9";
+			this->button9->Size = System::Drawing::Size(159, 34);
+			this->button9->TabIndex = 14;
+			this->button9->Text = L"Удалить текущий раздел";
+			this->button9->UseVisualStyleBackColor = true;
+			this->button9->Click += gcnew System::EventHandler(this, &MyForm::button9_Click);
+			// 
+			// button10
+			// 
+			this->button10->Location = System::Drawing::Point(425, 521);
+			this->button10->Name = L"button10";
+			this->button10->Size = System::Drawing::Size(159, 34);
+			this->button10->TabIndex = 15;
+			this->button10->Text = L"Удалить подраздел";
+			this->button10->UseVisualStyleBackColor = true;
+			this->button10->Click += gcnew System::EventHandler(this, &MyForm::button10_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(612, 512);
+			this->ClientSize = System::Drawing::Size(612, 559);
+			this->Controls->Add(this->button10);
+			this->Controls->Add(this->button9);
 			this->Controls->Add(this->button8);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
@@ -226,34 +257,67 @@ namespace WinForm {
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
-	}	
-	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-	/*Tree t;
-	t.insert_new_chapter("Chapter 1");
-	t.insert_new_paragraph("P 1");
-	t.insert_new_article("A 1");
-	textBox1->Text = gcnew String(t.whole_tree_to_string().c_str());*/
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) 
+{
+	string str;
+	MarshalString(textBox5->Text, str);
+	t->change_content(str);
+	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
+}	
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) 
+{
+	string str;
+	MarshalString(textBox4->Text, str);
+	t->insert_new_article(str);
+	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
 }
-private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) 
+{
+	string str;
+	MarshalString(textBox2->Text, str);
+	t->insert_new_chapter(str);
+	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
+}
+private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) 
+{
+}
+private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) 
+{
 	t->next_section();
 	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
 }
-private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) 
+{
 	t->open_content();
 	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
 }
-private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) 
+{
 	t->return_back();
 	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
 }
-private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) 
+{
 	t->return_to_root();
+	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
+}
+private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) 
+{
+	string str;
+	MarshalString(textBox3->Text, str);
+	t->insert_new_paragraph(str);
+	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
+}
+private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) 
+{
+	t->delete_current_section();
+	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
+}
+private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	t->delete_content();
 	textBox1->Text = gcnew String(t->whole_tree_to_string().c_str());
 }
 };

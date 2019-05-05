@@ -29,7 +29,7 @@ void Tree:: delete_current_section()
 		}
 		else
 		{
-			p->l = cur;
+			p->l = cur->l;
 			cur = p;
 			recurring_delete(del->r);
 			delete del;
@@ -66,7 +66,15 @@ void Tree::insert_new_chapter(string _str)
 	}
 	else
 	{
-		cur->l = p;
+		if (cur->l != NULL)
+		{
+			p->l = cur->l;
+			cur->l = p;
+		}
+		else
+		{
+			cur->l = p;
+		}
 	}
 } 
 void Tree:: insert_new_paragraph(string _str)
@@ -82,11 +90,27 @@ void Tree:: insert_new_paragraph(string _str)
 	p->tn = 1;
 	if (cur->tn == 0)
 	{
-		cur->r = p;
+		if (cur->r != NULL)
+		{
+			p->l = cur->r;
+			cur->r = p;
+		}
+		else
+		{
+			cur->r = p;
+		}
 	}
 	else 
 	{
-		cur->l = p;
+		if (cur->l != NULL)
+		{
+			p->l = cur->l;
+			cur->l = p;
+		}
+		else
+		{
+			cur->l = p;
+		}
 	}
 }
 void Tree::insert_new_article(string _str)
@@ -99,14 +123,30 @@ void Tree::insert_new_article(string _str)
 	p->l = NULL;
 	p->r = NULL;
 	p->str = _str;
-	p->tn = 1;
+	p->tn = 2;
 	if (cur->tn == 1)
 	{
-		cur->r = p;
+		if (cur->r != NULL)
+		{
+			p->l = cur->r;
+			cur->r = p;
+		}
+		else
+		{
+			cur->r = p;
+		}
 	}
 	else
 	{
-		cur->l = p;
+		if (cur->l != NULL)
+		{
+			p->l = cur->l;
+			cur->l = p;
+		}
+		else
+		{
+			cur->l = p;
+		}
 	}
 }
 string Tree::whole_tree_to_string()
@@ -130,6 +170,70 @@ string Tree::whole_tree_to_string()
 		}
 		p = p->l;
 	}
+	/*Stack st;
+	st.Push(root);
+	while (!st.IsEmpty())
+	{
+		Node *t = st.Pop();
+		if (t != cur)
+		{
+			if (t->tn == 0)
+			{
+				res += t->str;
+				res += "\r\n";
+			}
+			else
+			{
+				if (t->tn == 1)
+				{
+					res += "  ";
+					res += t->str;
+					res += "\r\n";
+				}
+				else
+				{
+					res += "    ";
+					res += t->str;
+					res += "\r\n";
+				}
+			}
+		}
+		else
+		{
+			if (t->tn == 0)
+			{
+				res += "*";
+				res += t->str;
+				res += "\r\n";
+			}
+			else
+			{
+				if (t->tn == 1)
+				{
+					res += "  ";
+					res += "*";
+					res += t->str;
+					res += "\r\n";
+				}
+				else
+				{
+					res += "    ";
+					res += "*";
+					res += t->str;
+					res += "\r\n";
+				}
+			}
+			
+		}
+		if (t->l != NULL)
+		{
+			st.Push(t->l);
+		}
+		if (t->r != NULL)
+		{
+			st.Push(t->r);
+		}
+	}*/
 	return res;
 }
 string Tree::paragraphs_to_string(Node *t)
@@ -175,14 +279,14 @@ string Tree::articles_to_string(Node *t)
 		{
 			res += "    ";
 			res += p->str;
-			res += "\n";
+			res += "\r\n";
 		}
 		else
 		{
 			res += "    ";
 			res += "*";
 			res += p->str;
-			res += "\n";			
+			res += "\r\n";			
 		}
 		p = p->l;
 	}
